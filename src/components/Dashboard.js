@@ -1,21 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logout } from './redux/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from './redux/authActions';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    await dispatch(logout()).unwrap();
     navigate('/login');
   };
 
   return (
     <div>
-      <h1>Welcome to the Dashboard</h1>
-      <button onClick={handleLogout}>Exit</button>
+      <h1>Dashboard</h1>
+      {user ? (
+        <>
+          <p>Welcome, {user.username}!</p>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
