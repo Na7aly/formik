@@ -19,7 +19,7 @@ const Dashboard = () => {
       {user ? (
         <>
           <p>Welcome, {user.username}!</p>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>Exit</button>
         </>
       ) : (
         <p>Loading...</p>
