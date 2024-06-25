@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from './redux/authActions'; // Asigură-te că importul este corect
+import { registerUser } from './redux/authActions';
+import { MdEmail } from 'react-icons/md';
+import { IoMdLock } from 'react-icons/io';
+import { FaUser } from 'react-icons/fa';
+import { VscEye, VscEyeClosed } from 'react-icons/vsc';
+import styles from './Register.module.css'; // Import stiluri din module.css
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector((state) => state.auth.error);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -35,50 +42,92 @@ const Register = () => {
   });
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" {...formik.getFieldProps('username')} />
+    <div className={styles.boxForm} >
+      <div className={styles.registerBox}>
+      <div className={styles.gradient}></div>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
+        <p className={styles.title}>Register</p>
+
+        <div className={styles.labelBox}>
+          <label htmlFor="username" className={styles.label}></label>
+          <div className={styles.inputBox}>
+            <FaUser className={styles.userIcon} />
+            <input
+              id="username"
+              type="text"
+              placeholder="Username"
+              {...formik.getFieldProps('username')}
+              className={styles.inputField}
+            />
+          </div>
           {formik.touched.username && formik.errors.username ? (
-            <div>{formik.errors.username}</div>
+            <p className={styles.error}>{formik.errors.username}</p>
           ) : null}
         </div>
 
-        <div>
-          <label htmlFor="email">Email</label>
-          <input id="email" type="email" {...formik.getFieldProps('email')} />
+        <div className={styles.labelBox}>
+          <label htmlFor="email" className={styles.label}></label>
+          <div className={styles.inputBox}>
+            <MdEmail className={styles.emailIcon} />
+            <input
+              id="email"
+              type="email"
+              placeholder="E-mail"
+              {...formik.getFieldProps('email')}
+              className={styles.inputField}
+            />
+          </div>
           {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
+            <p className={styles.error}>{formik.errors.email}</p>
           ) : null}
         </div>
 
-        <div>
-          <label htmlFor="password">Password</label>
-          <input id="password" type="password" {...formik.getFieldProps('password')} />
+        <div className={styles.labelBox}>
+          <label htmlFor="password" className={styles.label}></label>
+          <div className={styles.inputBox}>
+            <IoMdLock className={styles.passwordIcon} />
+            <input
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              {...formik.getFieldProps('password')}
+              className={styles.inputField}
+            />
+            <button type="button" onClick={() => setShowPassword(!showPassword)} className={styles.eye}>
+              {showPassword ? <VscEyeClosed className={styles.noEyeIcon} /> : <VscEye className={styles.eyeIcon} />}
+            </button>
+          </div>
           {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
+            <p className={styles.error}>{formik.errors.password}</p>
           ) : null}
         </div>
 
-        <div>
-          <label htmlFor="repeatPassword">Repeat Password</label>
-          <input id="repeatPassword" type="password" {...formik.getFieldProps('repeatPassword')} />
+        <div className={styles.labelBox}>
+          <label htmlFor="repeatPassword" className={styles.label}></label>
+          <div className={styles.inputBox}>
+            <IoMdLock className={styles.passwordIcon} />
+            <input
+              id="repeatPassword"
+              type={showRepeatPassword ? 'text' : 'password'}
+              placeholder="Confirm Password"
+              {...formik.getFieldProps('repeatPassword')}
+              className={styles.inputField}
+            />
+            <button type="button" onClick={() => setShowRepeatPassword(!showRepeatPassword)} className={styles.eye}>
+              {showRepeatPassword ? <VscEyeClosed className={styles.noEyeIcon} /> : <VscEye className={styles.eyeIcon} />}
+            </button>
+          </div>
           {formik.touched.repeatPassword && formik.errors.repeatPassword ? (
-            <div>{formik.errors.repeatPassword}</div>
+            <p className={styles.error}>{formik.errors.repeatPassword}</p>
           ) : null}
         </div>
 
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {error && <p className={styles.error}>{error}</p>}
 
-        <button type="submit">Register</button>
+        <button type="submit" className={styles.registerButton}>Register</button>
+        <Link to="/login" className={styles.link}>Login</Link>
       </form>
-      <div>
-        <Link to="/login">
-          <button type="button">Login</button>
-        </Link>
-      </div>
+    </div>
     </div>
   );
 };
