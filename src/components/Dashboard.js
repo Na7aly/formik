@@ -1,7 +1,10 @@
+// Dashboard.js
+
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from './redux/authActions';
 import { useNavigate } from 'react-router-dom';
+import LogoutButton from '../components/LogoutButton/LogoutButton'; // Verifică calea corectă către componenta LogoutButton
+import { logout } from './redux/authActions'; // Verifică calea corectă către funcția logout
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -9,8 +12,13 @@ const Dashboard = () => {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = async () => {
-    await dispatch(logout()).unwrap();
-    navigate('/login');
+    try {
+      await dispatch(logout());
+      navigate('/login'); // Redirecționează după logout către pagina de login
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Poți trata erorile de logout aici
+    }
   };
 
   return (
@@ -19,7 +27,7 @@ const Dashboard = () => {
       {user ? (
         <>
           <p>Welcome, {user.username}!</p>
-          <button onClick={handleLogout}>Exit</button>
+          <LogoutButton /> {/* Adaugă butonul de logout */}
         </>
       ) : (
         <p>Loading...</p>

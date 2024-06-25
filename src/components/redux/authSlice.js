@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login, logout } from './authActions';
+import { registerUser, login, logout } from './authActions';
 
 const initialState = {
-  user: null,
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem('user')) || null,
+  isAuthenticated: !!localStorage.getItem('token'),
   error: null,
 };
 
@@ -13,10 +13,22 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isAuthenticated = true;
+        state.error = null;
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('token', action.payload.token);
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.error = action.payload.message;
+      })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuthenticated = true;
         state.error = null;
+        localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload.message;
@@ -24,6 +36,11 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.isAuthenticated = false;
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.error = action.payload.message;
       });
   },
 });

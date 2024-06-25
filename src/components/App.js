@@ -4,11 +4,7 @@ import { useSelector } from 'react-redux';
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
-
-const PrivateRoute = ({ element: Element, ...rest }) => {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
-};
+import PrivateRoute from './PriveteRoute';
 
 const App = () => {
   return (
