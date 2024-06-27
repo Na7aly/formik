@@ -1,16 +1,16 @@
-// LogoutButton.js
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import logout from './logout'; // Importă funcția logout
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../redux/auth/authActions'; // Importă acțiunea logout
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logout(); // Apelul funcției de logout care include token-ul JWT
-      // Poți redirecționa aici spre pagina de login sau unde dorești după logout
+      await dispatch(logout()).unwrap(); // Apelul acțiunii de logout din Redux
+      navigate('/login'); // Redirecționează către pagina de login
     } catch (error) {
       console.error('Logout failed:', error);
       // Tratează erorile de logout aici

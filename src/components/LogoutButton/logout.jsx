@@ -1,7 +1,7 @@
 // logout.js
 
 import axios from 'axios';
-import { clearToken } from '../apiAuth';
+import { clearToken } from '../api';
 
 const logout = async () => {
     const token = localStorage.getItem('token');
