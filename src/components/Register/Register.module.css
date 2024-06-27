@@ -6,19 +6,19 @@
     padding: 23px 20px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('./images/mobileRegistr.webp');
+    background-image: url('../images/mobileRegistr.webp');
     background-color: #101010;
   }
   
   @media only screen and (min-width: 768px) {
     .boxForm {
-      background-image: url('./images/tabletRegistr.webp');
+      background-image: url('../images/tabletRegistr.webp');
     }
   }
   
   @media only screen and (min-width: 1280px) {
     .boxForm {
-      background-image: url('./images/desctopRegister.webp');
+      background-image: url('../images/desctopRegister.webp');
     }
   }
 /* .boxForm {

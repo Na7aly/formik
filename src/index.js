@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store from './components/redux/store';
+import store from './components/redux/auth/store';
 import App from './components/App';
-import { api, setToken } from './components/api';
+import { api, setToken } from './components/apiAuth';
 
 const token = localStorage.getItem('token');
 if (token) {

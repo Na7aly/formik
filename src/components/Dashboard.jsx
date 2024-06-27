@@ -3,8 +3,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import LogoutButton from '../components/LogoutButton/LogoutButton'; // Verifică calea corectă către componenta LogoutButton
-import { logout } from './redux/authActions'; // Verifică calea corectă către funcția logout
+import LogoutButton from './LogoutButton/LogoutButton'; // Verifică calea corectă către componenta LogoutButton
+import { logout } from './redux/auth/authActions'; // Verifică calea corectă către funcția logout
 
 const Dashboard = () => {
   const dispatch = useDispatch();

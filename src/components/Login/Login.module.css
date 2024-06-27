@@ -6,19 +6,19 @@
     padding: 23px 20px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('../components/images/mobileLogin.webp');
+    background-image: url('../images/mobileLogin.webp');
     background-color: #101010;
   }
   
   @media only screen and (min-width: 768px) {
     .loginContainer {
-      background-image: url('../components/images/tabletLogin.webp');
+      background-image: url('../images/tabletLogin.webp');
     }
   }
   
   @media only screen and (min-width: 1280px) {
     .loginContainer {
-      background-image: url('../components//images//desctopLogin.webp');
+      background-image: url('../images/desctopLogin.webp');
     }
   }
   .loginBox{

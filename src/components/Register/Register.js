@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from './redux/authActions';
+import { registerUser } from '../redux/auth/authActions';
 import { MdEmail } from 'react-icons/md';
 import { IoMdLock } from 'react-icons/io';
 import { FaUser } from 'react-icons/fa';

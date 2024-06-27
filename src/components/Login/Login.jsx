@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from './redux/authActions';
+import { login } from '../redux/auth/authActions';
 import { MdEmail } from 'react-icons/md';
 import { IoMdLock } from 'react-icons/io';
 import styles from './Login.module.css';
