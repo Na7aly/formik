@@ -7,6 +7,7 @@ import { login } from '../redux/auth/authActions';
 import { MdEmail } from 'react-icons/md';
 import { IoMdLock } from 'react-icons/io';
 import styles from './Login.module.css';
+import icons from '../images/icons.svg';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,19 @@ const LoginForm = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginBox}>
-        <h2>Login</h2>
+      <div className={styles.gradient}></div>  
+
+        
+      <div className={styles.logoGroup}>
+      <svg className={styles.iconLogo} width={25} height={25}>
+        <use href={`${icons}#icon-Logo`} />
+      </svg>
+      <span className={styles.title}>Money Guard</span>
+    </div>
+
+
+
+
         <form onSubmit={formik.handleSubmit} className={styles.loginForm}>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>

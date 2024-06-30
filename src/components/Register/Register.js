@@ -9,6 +9,7 @@ import { IoMdLock } from 'react-icons/io';
 import { FaUser } from 'react-icons/fa';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import styles from './Register.module.css'; // Import stiluri din module.css
+import icons from '../images/icons.svg';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -43,10 +44,19 @@ const Register = () => {
 
   return (
     <div className={styles.boxForm} >
+      
       <div className={styles.registerBox}>
+        
       <div className={styles.gradient}></div>
+      
       <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <p className={styles.title}>Register</p>
+      <div className={styles.logoGroup}>
+      <svg className={styles.iconLogo} width={25} height={25}>
+        <use href={`${icons}#icon-Logo`} />
+      </svg>
+      <span className={styles.title}>Money Guard</span>
+    </div>
+  
 
         <div className={styles.labelBox}>
           <label htmlFor="username" className={styles.label}></label>
